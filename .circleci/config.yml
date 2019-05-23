@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: daewok/sbcl:1.5.2-alpine3.9
+    
+    working_directory: ~/quicklisp/local-projects/circleci-101
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install quicklisp
+          command: |
+            apk update
+            apk add wget
+            wget https://beta.quicklisp.org/quicklisp.lisp
+            cat quicklisp.lisp init-quicklisp.lisp | sbcl
+
+      - run:
+          name: Build
+            cp .sbclrc ~/
+            cat build.lisp | sbcl
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - build
