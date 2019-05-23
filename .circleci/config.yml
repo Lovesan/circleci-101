@@ -54,7 +54,8 @@ workflows:
 
   default:
     jobs:
-      - build
+      - build:
+          context: integration_tests
 
   nightly:
     triggers:
