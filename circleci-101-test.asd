@@ -23,12 +23,12 @@
 ;;; DEALINGS IN THE SOFTWARE.
 
 (asdf:defsystem #:circleci-101-test
-  :version "0.1.0"
+  :version "0.2.0"
   :description "CircleCI 101 Tests"
   :author "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :maintainer "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :licence "MIT"
-  :depends-on ((:version #:circleci-101 "0.1.0")
+  :depends-on ((:version #:circleci-101 "0.2.0")
                (:version #:fiveam "1.4.1"))
   :serial t
   :components ((:module "test"
