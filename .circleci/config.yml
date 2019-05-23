@@ -9,29 +9,17 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Install wget
-          command: |
-            apk update
-            apk add wget
-
-      - run:
-          name: Download quicklisp
-          command: |
-            wget https://beta.quicklisp.org/quicklisp.lisp
-            cp .sbclrc ~/
-            mkdir -p /root/.config/common-lisp
-            cp asdf-output-translations.conf /root/.config/common-lisp
-            cat quicklisp.lisp circleci-101.asd circleci-101-test.asd | sha1sum > .cache
-
       - restore_cache:
           keys:
-            - v1-deps-{{ checksum ".cache" }}
-            - v1-deps-
+            - v3-deps-{{ checksum ".quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
+            - v3-deps-
 
       - run:
           name: Install quicklisp
           command: |
+            cp .sbclrc ~/
+            mkdir -p /root/.config/common-lisp
+            cp asdf-output-translations.conf /root/.config/common-lisp
             if [ ! -f ~/quicklisp/setup.lisp ]; then
               cat quicklisp.lisp init-quicklisp.lisp | sbcl
             fi
@@ -45,7 +33,7 @@ jobs:
           command: cat test.lisp | sbcl
 
       - save_cache:
-          key: v1-deps-{{ checksum ".cache" }}
+          key: v3-deps-{{ checksum ".quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
           paths:
             - quicklisp.lisp
             - ~/quicklisp
