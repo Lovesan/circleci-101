@@ -7,12 +7,13 @@ jobs:
     working_directory: ~/quicklisp/local-projects/circleci-101
 
     steps:
-      - checkout
 
       - restore_cache:
           keys:
             - v3-deps-{{ checksum "quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
             - v3-deps-
+
+      - checkout
 
       - run:
           name: Install quicklisp
