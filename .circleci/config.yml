@@ -59,3 +59,15 @@ workflows:
     jobs:
       - build:
           context: integration_tests
+
+  every_5_min:
+    triggers:
+      - schedule:
+          cron: "*/5 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build:
+          context: integration_tests
