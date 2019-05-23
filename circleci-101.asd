@@ -33,6 +33,7 @@
   :components ((:module "src"
                 :serial t
                 :components ((:file "package")
-                             (:file "hello")))))
+                             (:file "hello"))))
+  :in-order-to ((test-op (test-op #:circleci-101-test))))
 
 ;; vim: ft=lisp et
