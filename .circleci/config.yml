@@ -26,8 +26,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
-            - deps-
+            - v1-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
+            - v1-deps-
 
       - run:
           name: Build
@@ -38,7 +38,7 @@ jobs:
           command: cat test.lisp | sbcl
 
       - save_cache:
-          key: deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
+          key: v1-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
           paths:
             - ~/quicklisp
             - ~/.cache/common-lisp
