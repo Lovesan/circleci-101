@@ -4,16 +4,16 @@ jobs:
     docker:
       - image: daewok/sbcl:1.5.2-alpine3.9
     
-    working_directory: ~/quicklisp/local-projects/circleci-101
+    working_directory: ~/app
 
     steps:
 
+      - checkout
+
       - restore_cache:
           keys:
-            - v3-deps-{{ checksum "quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
-            - v3-deps-
-
-      - checkout
+            - v4-deps-{{ checksum "quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
+            - v4-deps-
 
       - run:
           name: Install quicklisp
@@ -21,6 +21,7 @@ jobs:
             cp .sbclrc ~/
             mkdir -p /root/.config/common-lisp
             cp asdf-output-translations.conf /root/.config/common-lisp
+            cp source-registry.conf /root/.config/common-lisp
             if [ ! -f ~/quicklisp/setup.lisp ]; then
               cat quicklisp.lisp init-quicklisp.lisp | sbcl
             fi
@@ -34,7 +35,7 @@ jobs:
           command: cat test.lisp | sbcl
 
       - save_cache:
-          key: v3-deps-{{ checksum "quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
+          key: v4-deps-{{ checksum "quicklisp.lisp" }}-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}
           paths:
             - quicklisp.lisp
             - ~/quicklisp
