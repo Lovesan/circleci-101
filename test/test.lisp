@@ -6,8 +6,8 @@
 
 (in-package #:circleci-101-test)
 
-(defvar *run-integration-tests* (let ((env (uiop:getenv "RUN_INTEGRATION_TESTS")))
-                                  (and env (string-equal env "t"))))
+(defparameter *run-integration-tests* (let ((env (uiop:getenv "RUN_INTEGRATION_TESTS")))
+                                        (and env t)))
 
 (def-suite circleci-101-suite
   :description "Tests")
