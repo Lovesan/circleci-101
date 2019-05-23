@@ -51,19 +51,7 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build:
-          context: integration_tests
-
-  every_5_min:
-    triggers:
-      - schedule:
-          cron: "*/5 * * * *"
+          cron: "0/5 * * * *"
           filters:
             branches:
               only:
