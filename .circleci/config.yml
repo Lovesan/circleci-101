@@ -10,18 +10,24 @@ jobs:
       - checkout
 
       - run:
+          name: Install wget
+          command: apk update && apk add wget
+
+      - run:
+          name: Download quicklisp
+          command: wget https://beta.quicklisp.org/quicklisp.lisp
+
+      - run:
           name: Install quicklisp
-          command: |
-            apk update
-            apk add wget
-            wget https://beta.quicklisp.org/quicklisp.lisp
-            cat quicklisp.lisp init-quicklisp.lisp | sbcl
+          command: cat quicklisp.lisp init-quicklisp.lisp | sbcl
+
+      - run:
+          name: Copy .sbclrc
+          command: cp .sbclrc ~/
 
       - run:
           name: Build
-            command: |
-              cp .sbclrc ~/
-              cat build.lisp | sbcl
+            command: cat build.lisp | sbcl
 
 workflows:
   version: 2
