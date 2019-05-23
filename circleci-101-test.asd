@@ -1,6 +1,6 @@
 ;;;; -*- Mode: lisp; indent-tabs-mode: nil -*-
 
-;;; Copyright (C) 2017, Dmitry Ignatiev <lovesan.ru at gmail.com>
+;;; Copyright (C) 2019, Dmitry Ignatiev <lovesan.ru at gmail.com>
 
 ;;; Permission is hereby granted, free of charge, to any person
 ;;; obtaining a copy of this software and associated documentation
