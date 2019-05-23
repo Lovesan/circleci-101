@@ -27,7 +27,7 @@ jobs:
 
       - run:
           name: Build
-            command: cat build.lisp | sbcl
+          command: cat build.lisp | sbcl
 
 workflows:
   version: 2
