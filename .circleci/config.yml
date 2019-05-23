@@ -22,11 +22,12 @@ jobs:
             cp .sbclrc ~/
             mkdir -p /root/.config/common-lisp
             cp asdf-output-translations.conf /root/.config/common-lisp
+            cat quicklisp.lisp circleci-101.asd circleci-101-test.asd | sha1sum > .cache
 
       - restore_cache:
           keys:
-            - v2-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
-            - v2-deps-
+            - v1-deps-{{ checksum ".cache" }}
+            - v1-deps-
 
       - run:
           name: Install quicklisp
@@ -44,7 +45,7 @@ jobs:
           command: cat test.lisp | sbcl
 
       - save_cache:
-          key: v2-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
+          key: v1-deps-{{ checksum ".cache" }}
           paths:
             - quicklisp.lisp
             - ~/quicklisp
