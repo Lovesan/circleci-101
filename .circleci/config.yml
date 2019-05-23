@@ -21,8 +21,8 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
-            - v1-deps-
+            - v2-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
+            - v2-deps-
 
       - run:
           name: Install quicklisp
@@ -43,7 +43,7 @@ jobs:
           command: cat test.lisp | sbcl
 
       - save_cache:
-          key: v1-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
+          key: v2-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
           paths:
             - quicklisp.lisp
             - ~/quicklisp
