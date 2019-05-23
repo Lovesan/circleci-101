@@ -51,6 +51,19 @@ jobs:
 
 workflows:
   version: 2
+
   default:
     jobs:
       - build
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
+          context: integration_tests

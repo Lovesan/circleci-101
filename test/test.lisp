@@ -6,6 +6,9 @@
 
 (in-package #:circleci-101-test)
 
+(defvar *run-integration-tests* (let ((env (uiop:getenv "RUN_INTEGRATION_TESTS")))
+                                  (and env (string-equal env "t"))))
+
 (def-suite circleci-101-suite
   :description "Tests")
 
@@ -13,3 +16,6 @@
 
 (test test-hello
       (is (eq t t)))
+
+(when *run-integration-tests*
+    (test test-integration (is (eq t t))))
