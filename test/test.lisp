@@ -15,7 +15,9 @@
 (in-suite circleci-101-suite)
 
 (test test-hello
-      (is (eq t t)))
+  (is (eq t t)))
 
-(when *run-integration-tests*
-    (test test-integration (is (eq t t))))
+(test test-integration
+  (if *run-integration-tests*
+    (is (eq t t))
+    (skip "Not an integration test")))
