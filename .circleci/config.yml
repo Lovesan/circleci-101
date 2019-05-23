@@ -19,8 +19,9 @@ jobs:
 
       - run:
           name: Build
-            cp .sbclrc ~/
-            cat build.lisp | sbcl
+            command: |
+              cp .sbclrc ~/
+              cat build.lisp | sbcl
 
 workflows:
   version: 2
