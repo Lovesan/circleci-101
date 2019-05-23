@@ -28,7 +28,8 @@
   :author "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :maintainer "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :licence "MIT"
-  :depends-on (#:circleci-101 #:fiveam)
+  :depends-on ((:version #:circleci-101 "0.1.0")
+               (:version #:fiveam "1.4.1"))
   :serial t
   :components ((:module "test"
                 :serial t

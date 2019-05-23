@@ -8,6 +8,8 @@ RUN apk update && apk add wget && \
     wget https://beta.quicklisp.org/quicklisp.lisp && \
     cat quicklisp.lisp init-quicklisp.lisp | sbcl && \
     cp .sbclrc /root && \
+    mkdir -p /root/.config/common-lisp && \
+    cp asdf-output-translations.conf /root/.config/common-lisp && \
     cat build.lisp | sbcl
 
 FROM alpine:3.9 as production

@@ -28,7 +28,9 @@
   :author "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :maintainer "Dmitry Ignatiev <lovesan.ru at gmail.com>"
   :licence "MIT"
-  :depends-on (#:clack #:clack-handler-hunchentoot #:uiop)
+  :depends-on ((:version #:clack "2.0.0")
+               (:version #:clack-handler-hunchentoot "0.4.0")
+               (:version #:uiop "3.3.1"))
   :serial t
   :components ((:module "src"
                 :serial t

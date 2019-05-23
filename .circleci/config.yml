@@ -21,6 +21,13 @@ jobs:
             wget https://beta.quicklisp.org/quicklisp.lisp
             cat quicklisp.lisp init-quicklisp.lisp | sbcl
             cp .sbclrc ~/
+            mkdir -p /root/.config/common-lisp
+            cp asdf-output-translations.conf /root/.config/common-lisp
+
+      - restore_cache:
+          keys:
+            - deps-{{ checksum circleci-101.asd }}-{{ checksum circleci-101-test.asd }}
+            - deps-
 
       - run:
           name: Build
@@ -29,6 +36,11 @@ jobs:
       - run:
           name: Test
           command: cat test.lisp | sbcl
+
+      - save_cache:
+          key: deps-{{ checksum circleci-101.asd }}-{{ checksum circleci-101-test.asd }}
+          paths:
+            - ~/.cache/common-lisp
 
 workflows:
   version: 2
