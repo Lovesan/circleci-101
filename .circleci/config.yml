@@ -17,7 +17,11 @@ jobs:
 
       - run:
           name: Download quicklisp
-          command: wget https://beta.quicklisp.org/quicklisp.lisp
+          command: |
+            wget https://beta.quicklisp.org/quicklisp.lisp
+            cp .sbclrc ~/
+            mkdir -p /root/.config/common-lisp
+            cp asdf-output-translations.conf /root/.config/common-lisp
 
       - restore_cache:
           keys:
@@ -27,12 +31,9 @@ jobs:
       - run:
           name: Install quicklisp
           command: |
-            if [ ! -d ~/quicklisp ]; then
+            if [ ! -f ~/quicklisp/setup.lisp ]; then
               cat quicklisp.lisp init-quicklisp.lisp | sbcl
             fi
-            cp .sbclrc ~/
-            mkdir -p /root/.config/common-lisp
-            cp asdf-output-translations.conf /root/.config/common-lisp
 
       - run:
           name: Build
