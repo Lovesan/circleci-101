@@ -11,7 +11,9 @@ jobs:
 
       - run:
           name: Install wget
-          command: apk update && apk add wget
+          command: |
+            apk update
+            apk add wget
 
       - run:
           name: Download quicklisp
