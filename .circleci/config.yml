@@ -15,6 +15,10 @@ jobs:
             apk update
             apk add wget
 
+      - run:
+          name: Download quicklisp
+          command: wget https://beta.quicklisp.org/quicklisp.lisp
+
       - restore_cache:
           keys:
             - v1-deps-{{ checksum "circleci-101.asd" }}-{{ checksum "circleci-101-test.asd" }}-{{ checksum "quicklisp.lisp" }}
@@ -23,8 +27,7 @@ jobs:
       - run:
           name: Install quicklisp
           command: |
-            if [ ! -f quicklisp.lisp ]; then
-              wget https://beta.quicklisp.org/quicklisp.lisp
+            if [ ! -d ~/quicklisp ]; then
               cat quicklisp.lisp init-quicklisp.lisp | sbcl
             fi
             cp .sbclrc ~/
